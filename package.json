@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-full-stack-template",
+  "name": "macro-calculator",
   "version": "0.0.1",
-  "description": "A full-stack template for Thinkful students",
+  "description": "An application that helps people calculate their macros.",
   "main": "index.js",
   "main:server": "server/index.js",
   "main:client": "client/js/index.js",
@@ -82,6 +82,12 @@
   },
   "dependencies": {
     "express": "^4.14.0",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "react-router": "^3.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   }
 }
