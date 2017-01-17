@@ -10,10 +10,30 @@ class Home extends Component {
 
 	render() {
 		return (
-			<section className="home-container">
-				<h1 className="title">Welcome to MacroCalculator!</h1>
-				<a href="#/calculator"><button className="menu-button">Start</button></a>
-				<a href="#/help"><button className="menu-button">Help</button></a>
+			<section>
+				<section className="home-container">
+					<h1 className="title">Welcome to MacroCalculator!</h1>
+				</section>
+
+				<section className="home-col3">
+					<section className="col3-section">
+						<h2>First time here?</h2>
+						<p>MacroCalculator provides estimates on your total daily energy expenditure and breaksdown your daily macronutrients.</p>
+						<a href="#/calculator" className="home-links"><p className="link-button">Click here to get started!</p></a>
+					</section>
+
+					<section className="col3-section">
+						<h2>Already know your goals?</h2>
+						<p>If you already know your TDEE and goals, we have another tool called MacroDivider that will help you divvy up your macros!</p>
+						<a href="#/calculator" className="home-links"><p className="link-button">Click here to go to MacroDivider!</p></a>
+					</section>
+
+					<section className="col3-section">
+						<h2>Having trouble?</h2>
+						<p>Don't know what a certain word means or what your results mean? We're here to help!</p>
+						<a href="#/help" className="home-links"><p className="link-button">Click here to get help!</p></a>
+					</section>
+				</section>
 			</section>
 		);
 	}
