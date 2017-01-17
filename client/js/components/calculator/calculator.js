@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import BMR from './bmr';
+import Activity from './activity-level';
+import Goals from './goals';
 
 class Calculator extends Component {
 
@@ -9,7 +12,18 @@ class Calculator extends Component {
 	render() {
 		return (
 			<section className="calculator-container">
-				<h1>In Calculator</h1>
+				<h1 className="title">MacroCalculator</h1>
+				<BMR />
+				<hr/>
+				<Activity />
+				<hr/>
+				<Goals />
+				<hr/>
+
+				<section id="results" className="calc-section">
+
+				</section>
+
 			</section>
 		);
 	}

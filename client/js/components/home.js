@@ -11,7 +11,7 @@ class Home extends Component {
 	render() {
 		return (
 			<section className="home-container">
-				<h1 className="home-title">Welcome to MacroCalculator!</h1>
+				<h1 className="title">Welcome to MacroCalculator!</h1>
 				<a href="#/calculator"><button>Start</button></a>
 			</section>
 		);
