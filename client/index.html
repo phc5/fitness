@@ -6,11 +6,35 @@
 <title>MacroCalculator</title>
 
 <link rel="stylesheet" href="css/{{name}}.{{version}}{{#production}}.min{{/production}}.css">
-<link href="https://fonts.googleapis.com/css?family=Buda:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Buda:300|Fira+Sans+Extra+Condensed" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
 <!-- Your HTML goes here -->
 <div id="app"></div>
+
+<script>
+	  $(function(){
+		    $("input:radio").change(function () {
+			    if ($("#custom-protein").is(":checked")) {
+			         $("#field-protein").removeAttr("readonly");
+			    }
+			    else {
+			    	console.log("unchcked");
+			        $("#field-protein").attr("readonly");
+			    }
+			});
+
+			$("#custom-fat").change(function () {
+			    if ($("#custom-fat").is(":checked")) {
+			         $("#field-fat").removeAttr("readonly");
+			    }
+			    else {
+			        $("#field-fat").attr("readonly");
+			    }
+			});
+		});
+</script>
 
 <script src="js/{{name}}.{{version}}{{#production}}.min{{/production}}.js"></script>
 

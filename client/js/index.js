@@ -6,7 +6,8 @@ import {Provider} from 'react-redux';
 import store from './store';
 import App from './components/app';
 import Home from './components/home';
-import Calc from './components/calculator/calculator';
+import Calculator from './components/calculator/calculator';
+import Help from './components/help/help';
 
 console.log(`Client running in ${process.env.NODE_ENV} mode`);
 
@@ -16,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			<Router history={hashHistory}>
 				<Route path="/" component={App}>
 					<IndexRoute component={Home} />
-					<Route path="/calculator" component={Calc} />
+					<Route path="/calculator" component={Calculator} />
+					<Route path="/help" component={Help} />
 				</Route>
 			</Router>
 		</Provider>, document.getElementById('app'));

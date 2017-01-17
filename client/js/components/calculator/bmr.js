@@ -16,7 +16,7 @@ class BMR extends Component {
 		this.props.dispatch(actions.calculateBMR(
 			form.gender.value, form.age.value,
 			form.feet.value, form.inches.value,
-			form.pounds.value, form.fat.value)
+			form.pounds.value)
 		);
 	}
 
@@ -48,16 +48,11 @@ class BMR extends Component {
 						<input type="text" pattern="^[0-9]*$" name="pounds" required autoComplete="off"/> pounds<br/>
 						</section>
 
-						<section>
-						<h2>Body Fat Percentage</h2>
-						<input type="text" pattern="^[0-9]*$" name="fat" required autoComplete="off"/> %<br/>
-						</section>
-
 						<input className="submit" type="submit" value="Calculate BMR"/>
 					</form>
 					
 					<section id="bmr-output">
-						<h3>Your &nbsp;BMR: {this.props.BMR}</h3>
+						<h3>Your BMR: {this.props.BMR}</h3>
 					</section>
 				</section>
 			</section>

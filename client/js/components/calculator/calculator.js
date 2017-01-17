@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import BMR from './bmr';
 import Activity from './activity-level';
 import Goals from './goals';
+import Nutrition from './nutrition';
+import Results from './results';
 
 class Calculator extends Component {
 
@@ -12,18 +14,16 @@ class Calculator extends Component {
 	render() {
 		return (
 			<section className="calculator-container">
-				<h1 className="title">MacroCalculator</h1>
+				<a href="/" className="title"><h1>MacroCalculator</h1></a>
 				<BMR />
 				<hr/>
 				<Activity />
 				<hr/>
 				<Goals />
 				<hr/>
-
-				<section id="results" className="calc-section">
-
-				</section>
-
+				<Nutrition />
+				<hr/>
+				<Results />
 			</section>
 		);
 	}

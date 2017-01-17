@@ -16,7 +16,7 @@ class Activity extends Component {
 	render() {
 		return (
 			<section id="activity-level">
-				<h2 className="marg-bottom">Activity Level</h2>
+				<h2>Activity Level</h2>
 				<form onSubmit={this._submit.bind(this)} className="flex-between">
 					<section>
 						<input type="radio" name="activity" value="sedentary"/> Sedentary (little or no exercise)<br/>

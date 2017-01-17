@@ -13,6 +13,7 @@ class Home extends Component {
 			<section className="home-container">
 				<h1 className="title">Welcome to MacroCalculator!</h1>
 				<a href="#/calculator"><button>Start</button></a>
+				<a href="#/help"><button>Help</button></a>
 			</section>
 		);
 	}
