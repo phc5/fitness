@@ -28,12 +28,11 @@ const calculateGoals = (goal) => {
 	};
 };
 
-const CALCULATE_NUTRITION = 'CALCULATE_NUTRITION';
-const calculateNutrition = (protein, fat) => {
+const CALCULATE_BODY_TYPE = 'CALCULATE_BODY_TYPE';
+const calculateBodyType = (bodyType) => {
 	return {
-		type: CALCULATE_NUTRITION,
-		protein: protein,
-		fat: fat
+		type: CALCULATE_BODY_TYPE,
+		bodyType: bodyType
 	};
 };
 
@@ -47,5 +46,5 @@ exports.calculateTDEE = calculateTDEE;
 exports.CALCULATE_GOALS = CALCULATE_GOALS;
 exports.calculateGoals = calculateGoals;
 
-exports.CALCULATE_NUTRITION = CALCULATE_NUTRITION;
-exports.calculateNutrition = calculateNutrition;
+exports.CALCULATE_BODY_TYPE = CALCULATE_BODY_TYPE;
+exports.calculateBodyType = calculateBodyType;

@@ -5,6 +5,7 @@ const initialState = {
 	BMR: "",
 	TDEE: "",
 	goal: "",
+	goalWord: "",
 	fat: "",
 	carbs: "",
 	protein: ""
@@ -42,6 +43,7 @@ const reducer = (state, action) => {
 		state.TDEE = TDEE.toFixed(2).toString() + " calories/day";
 	} else if (action.type === actions.CALCULATE_GOALS) {
 		let goal = 0;
+		state.goalWord = action.goal;
 		const TDEE = state.TDEE.slice(0,7);
 		if (action.goal === 'moderate loss') {
 			goal = TDEE * .85;
@@ -59,15 +61,101 @@ const reducer = (state, action) => {
 			goal = TDEE * 1.15;
 		}
 		state.goal = goal.toFixed(2).toString() + " calories/day";
-	} else if (action.type === actions.CALCULATE_NUTRITION) {
-		const fat = action.fat * state.bodyWeight;
-		console.log(fat);
-		const protein = action.protein * state.bodyWeight;
-		const carbs = (state.goal.slice(0,7) - (fat * 9) - (protein * 4)) / 4;
-		
-		state.fat = fat.toFixed(2).toString() + "g";
-		state.protein = protein.toFixed(2).toString() + "g";
-		state.carbs = carbs.toFixed(2).toString() + "g"; 
+	} else if (action.type === actions.CALCULATE_BODY_TYPE) {
+		if (action.bodyType === 'ectomorph') {
+			if (state.goalWord === 'moderate loss') {
+				state.carbs = (state.goal.slice(0,7) * .40) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goal.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'standard loss') {
+				state.carbs = (state.goal.slice(0,7) * .35) / 4;
+				state.protein = (state.goal.slice(0,7) * .30) / 4;
+				state.fat = (state.goal.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'intense loss') {
+				state.carbs = (state.goal.slice(0,7) * .30) / 4;
+				state.protein = (state.goal.slice(0,7) * .30) / 4;
+				state.fat = (state.goal.slice(0,7) * .40) / 9;
+			} else if (state.goalWord === 'sedentary') {
+				state.carbs = (state.goal.slice(0,7) * .45) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goal.slice(0,7) * .30) / 9;
+			} else if (state.goalWord === 'moderate gain') {
+				state.carbs = (state.goal.slice(0,7) * .50) / 4;
+				state.protein = (state.goal.slice(0,7) * .30) /4 ;
+				state.fat = (state.goal.slice(0,7) * .20) / 9;
+			} else if (state.goalWord === 'standard gain') {
+				state.carbs = (state.goal.slice(0,7) * .55) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goal.slice(0,7) * .20) / 9;
+			} else if (state.goalWord === 'intense gain') {
+				state.carbs = (state.goal.slice(0,7) * .60) / 4;
+				state.protein = (state.goal.slice(0,7) * .20) / 4;
+				state.fat = (state.goal.slice(0,7) * .20) / 9;
+			}
+		} else if (action.bodyType === 'mesomorph') {
+			if (state.goalWord === 'moderate loss') {
+				state.carbs = (state.goal.slice(0,7) * .30) / 4;
+				state.protein = (state.goal.slice(0,7) * .30) / 4;
+				state.fat = (state.goal.slice(0,7) * .40) / 9;
+			} else if (state.goalWord === 'standard loss') {
+				state.carbs = (state.goal.slice(0,7) * .25) / 4;
+				state.protein = (state.goal.slice(0,7) * .30) / 4;
+				state.fat = (state.goal.slice(0,7) * .45) / 9;
+			} else if (state.goalWord === 'intense loss') {
+				state.carbs = (state.goal.slice(0,7) * .20) / 4;
+				state.protein = (state.goal.slice(0,7) * .40) / 4;
+				state.fat = (state.goal.slice(0,7) * .40) / 9;
+			} else if (state.goalWord === 'sedentary') {
+				state.carbs = (state.goal.slice(0,7) * .35) / 4
+				state.protein = (state.goal.slice(0,7) * .30) / 4;
+				state.fat = (state.goal.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'moderate gain') {
+				state.carbs = (state.goal.slice(0,7) * .40) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goa.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'standard gain') {
+				state.carbs = (state.goal.slice(0,7) * .45) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goal.slice(0,7) * .30) / 9;
+			} else if (state.goalWord === 'intense gain') {
+				state.carbs = (state.goal.slice(0,7) * .50) / 4;
+				state.protein = (state.goal.slice(0,7) * .25) / 4;
+				state.fat = (state.goal.slice(0,7) * .25) / 9;
+			}
+		} else if (action.bodyType === 'endomorph') {
+			if (state.goalWord === 'moderate loss') {
+				state.carbs = (state.goal.slice(0,7) * .20) / 4;
+				state.protein = (state.goal.slice(0,7) * .50) / 4;
+				state.fat = (state.goal.slice(0,7) * .30) / 9;
+			} else if (state.goalWord === 'standard loss') {
+				state.carbs = (state.goal.slice(0,7) * .15) / 4;
+				state.protein = (state.goal.slice(0,7) * .50) / 4;
+				state.fat = (state.goal.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'intense loss') {
+				state.carbs = (state.goal.slice(0,7) * .10) / 4;
+				state.protein = (state.goal.slice(0,7) * .50) / 4;
+				state.fat = (state.goal.slice(0,7) * .40) / 9;
+			} else if (state.goalWord === 'sedentary') {
+				state.carbs = (state.goal.slice(0,7) * .25) / 4;
+				state.protein = (state.goal.slice(0,7) * .40) / 4;
+				state.fat = (state.goal.slice(0,7) * .35) / 9;
+			} else if (state.goalWord === 'moderate gain') {
+				state.carbs = (state.goal.slice(0,7) * .30) / 4;
+				state.protein = (state.goal.slice(0,7) * .50) / 4;
+				state.fat = (state.goal.slice(0,7) * .20) / 9;
+			} else if (state.goalWord === 'standard gain') {
+				state.carbs = (state.goal.slice(0,7) * .35) / 4;
+				state.protein = (state.goal.slice(0,7) * .45) / 4;
+				state.fat = (state.goal.slice(0,7) * .20) / 9;
+			} else if (state.goalWord === 'intense gain') {
+				state.carbs = (state.goal.slice(0,7) * .35) / 4;
+				state.protein = (state.goal.slice(0,7) * .40) / 4;
+				state.fat = (state.goal.slice(0,7) * .25) / 9;
+			}
+		}
+		state.carbs = state.carbs.toFixed(2).toString() + " grams/day";
+		state.fat = state.fat.toFixed(2).toString() + " grams/day";
+		state.protein = state.protein.toFixed(2).toString() + " grams/day";
 	}
 
 	console.log(state);
