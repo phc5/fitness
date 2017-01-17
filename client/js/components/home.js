@@ -12,8 +12,8 @@ class Home extends Component {
 		return (
 			<section className="home-container">
 				<h1 className="title">Welcome to MacroCalculator!</h1>
-				<a href="#/calculator"><button>Start</button></a>
-				<a href="#/help"><button>Help</button></a>
+				<a href="#/calculator"><button className="menu-button">Start</button></a>
+				<a href="#/help"><button className="menu-button">Help</button></a>
 			</section>
 		);
 	}

@@ -14,7 +14,7 @@ class Calculator extends Component {
 	render() {
 		return (
 			<section className="calculator-container">
-				<a href="/" className="title"><h1>MacroCalculator</h1></a>
+				<a href="/" className="title"><h1 style={{fontSize: 70 + 'px'}}>MacroCalculator</h1></a>
 				<BMR />
 				<hr/>
 				<Activity />
