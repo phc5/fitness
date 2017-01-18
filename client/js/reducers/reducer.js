@@ -8,8 +8,11 @@ const initialState = {
 	goalWord: "",
 	fat: "",
 	carbs: "",
-	protein: ""
-
+	protein: "",
+	dividerCarb: "",
+	dividerFat: "",
+	dividerProtein: "",
+	dividerError: false
 }
 
 const reducer = (state, action) => {
@@ -156,6 +159,20 @@ const reducer = (state, action) => {
 		state.carbs = state.carbs.toFixed(2).toString() + " grams/day";
 		state.fat = state.fat.toFixed(2).toString() + " grams/day";
 		state.protein = state.protein.toFixed(2).toString() + " grams/day";
+	} else if (action.type === actions.CALCULATE_DAILY_MACROS) {
+		state.dividerError = false;
+		const sum = Number(action.carb) + Number(action.fat) + Number(action.protein);
+		console.log(sum);
+		if (sum < 100 || sum > 100) {
+			state.dividerError = true;
+		}
+		const carb = ((Number(action.carb) / 100) * Number(action.tdee)) / 4;
+		const fat = ((Number(action.fat) / 100) * Number(action.tdee)) / 9;
+		const protein = ((Number(action.protein) / 100) * Number(action.tdee)) / 4;
+
+		state.dividerCarb = carb.toFixed(2).toString() + " grams/day";
+		state.dividerFat = fat.toFixed(2).toString() + " grams/day";
+		state.dividerProtein = protein.toFixed(2).toString() + " grams/day";
 	}
 
 	console.log(state);

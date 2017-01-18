@@ -36,6 +36,17 @@ const calculateBodyType = (bodyType) => {
 	};
 };
 
+const CALCULATE_DAILY_MACROS = 'CALCULATE_DAILY_MACROS';
+const calculateDailyMacros = (tdee, carb, fat, protein) => {
+	return {
+		type: CALCULATE_DAILY_MACROS,
+		tdee: tdee,
+		carb: carb,
+		fat: fat,
+		protein: protein
+	}
+}
+
 
 exports.CALCULATE_BMR = CALCULATE_BMR;
 exports.calculateBMR = calculateBMR;
@@ -48,3 +59,6 @@ exports.calculateGoals = calculateGoals;
 
 exports.CALCULATE_BODY_TYPE = CALCULATE_BODY_TYPE;
 exports.calculateBodyType = calculateBodyType;
+
+exports.CALCULATE_DAILY_MACROS = CALCULATE_DAILY_MACROS;
+exports.calculateDailyMacros = calculateDailyMacros;

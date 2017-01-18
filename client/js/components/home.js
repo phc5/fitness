@@ -25,7 +25,7 @@ class Home extends Component {
 					<section className="col3-section">
 						<h2>Already know your goals?</h2>
 						<p>If you already know your TDEE and goals, we have another tool called MacroDivider that will help you divvy up your macros!</p>
-						<a href="#/calculator" className="home-links"><p className="link-button">Click here to go to MacroDivider!</p></a>
+						<a href="#/macrodivider" className="home-links"><p className="link-button">Click here to go to MacroDivider!</p></a>
 					</section>
 
 					<section className="col3-section">
