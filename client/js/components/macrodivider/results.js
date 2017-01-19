@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import actions from '../../actions/actions';
+import Paper from 'material-ui/Paper';
 
 class Results extends Component {
 
@@ -9,14 +10,24 @@ class Results extends Component {
 	}
 
 	render() {
+		const paperStyle = {
+			width: '33%',
+			'text-align': 'center'
+		}
 		if (!this.props.dividerError) {
 			return (
 				<section>
 					<h2>Results</h2>
 					<section id="results">
-						<p>Carbs: {this.props.carb}</p>
-						<p>Fat: {this.props.fat}</p>
-						<p>Protein: {this.props.protein}</p>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Carbs: {this.props.carb}</p>
+						</Paper>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Fat: {this.props.fat}</p>
+						</Paper>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Protein: {this.props.protein}</p>
+						</Paper>
 					</section>
 				</section>
 			);
@@ -35,9 +46,9 @@ class Results extends Component {
 
 const mapStateToProps = function (state, props) {
     return {
- 		carb: state.dividerCarb,
- 		fat: state.dividerFat,
- 		protein: state.dividerProtein,
+ 		carb: state.carb,
+ 		fat: state.fat,
+ 		protein: state.protein,
  		dividerError: state.dividerError
     };
 };

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import actions from '../../actions/actions';
+import Paper from 'material-ui/Paper';
 
 class Results extends Component {
 
@@ -9,18 +10,37 @@ class Results extends Component {
 	}
 
 	render() {
-		return (
-			<section>
-				<section id="goal-output">
-					<h2>Your Results: </h2>
+		const paperStyle = {
+			width: '33%',
+			textAlign: 'center'
+		}
+		if (!this.props.dividerError) {
+			return (
+				<section>
+					<h2>Results</h2>
 					<section id="results">
-						<p>Protein: {this.props.protein}</p>
-						<p>Fat: {this.props.fat}</p>
-						<p>Carbohydrates: {this.props.carbs}</p>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Carbs: {this.props.carb}</p>
+						</Paper>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Fat: {this.props.fat}</p>
+						</Paper>
+						<Paper rounded={false} style={paperStyle} zDepth={1}>
+							<p>Protein: {this.props.protein}</p>
+						</Paper>
 					</section>
 				</section>
-			</section>
-		);
+			);
+		} else {
+			return (
+				<section>
+					<h2>Results</h2>
+					<section id="results">
+						<p>Percentages dont add up to 100. Please check your percentages!</p>
+					</section>
+				</section>
+			);
+		}
 	}
 }
 
@@ -28,7 +48,8 @@ const mapStateToProps = function (state, props) {
     return {
        	protein: state.protein,
        	fat: state.fat,
-       	carbs: state.carbs
+       	carb: state.carb,
+       	dividerError: state.dividerError
     };
 };
 

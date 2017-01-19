@@ -7,11 +7,8 @@ const initialState = {
 	goal: "",
 	goalWord: "",
 	fat: "",
-	carbs: "",
+	carb: "",
 	protein: "",
-	dividerCarb: "",
-	dividerFat: "",
-	dividerProtein: "",
 	dividerError: false
 }
 
@@ -64,101 +61,21 @@ const reducer = (state, action) => {
 			goal = TDEE * 1.15;
 		}
 		state.goal = goal.toFixed(2).toString() + " calories/day";
-	} else if (action.type === actions.CALCULATE_BODY_TYPE) {
-		if (action.bodyType === 'ectomorph') {
-			if (state.goalWord === 'moderate loss') {
-				state.carbs = (state.goal.slice(0,7) * .40) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goal.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'standard loss') {
-				state.carbs = (state.goal.slice(0,7) * .35) / 4;
-				state.protein = (state.goal.slice(0,7) * .30) / 4;
-				state.fat = (state.goal.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'intense loss') {
-				state.carbs = (state.goal.slice(0,7) * .30) / 4;
-				state.protein = (state.goal.slice(0,7) * .30) / 4;
-				state.fat = (state.goal.slice(0,7) * .40) / 9;
-			} else if (state.goalWord === 'sedentary') {
-				state.carbs = (state.goal.slice(0,7) * .45) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goal.slice(0,7) * .30) / 9;
-			} else if (state.goalWord === 'moderate gain') {
-				state.carbs = (state.goal.slice(0,7) * .50) / 4;
-				state.protein = (state.goal.slice(0,7) * .30) /4 ;
-				state.fat = (state.goal.slice(0,7) * .20) / 9;
-			} else if (state.goalWord === 'standard gain') {
-				state.carbs = (state.goal.slice(0,7) * .55) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goal.slice(0,7) * .20) / 9;
-			} else if (state.goalWord === 'intense gain') {
-				state.carbs = (state.goal.slice(0,7) * .60) / 4;
-				state.protein = (state.goal.slice(0,7) * .20) / 4;
-				state.fat = (state.goal.slice(0,7) * .20) / 9;
-			}
-		} else if (action.bodyType === 'mesomorph') {
-			if (state.goalWord === 'moderate loss') {
-				state.carbs = (state.goal.slice(0,7) * .30) / 4;
-				state.protein = (state.goal.slice(0,7) * .30) / 4;
-				state.fat = (state.goal.slice(0,7) * .40) / 9;
-			} else if (state.goalWord === 'standard loss') {
-				state.carbs = (state.goal.slice(0,7) * .25) / 4;
-				state.protein = (state.goal.slice(0,7) * .30) / 4;
-				state.fat = (state.goal.slice(0,7) * .45) / 9;
-			} else if (state.goalWord === 'intense loss') {
-				state.carbs = (state.goal.slice(0,7) * .20) / 4;
-				state.protein = (state.goal.slice(0,7) * .40) / 4;
-				state.fat = (state.goal.slice(0,7) * .40) / 9;
-			} else if (state.goalWord === 'sedentary') {
-				state.carbs = (state.goal.slice(0,7) * .35) / 4
-				state.protein = (state.goal.slice(0,7) * .30) / 4;
-				state.fat = (state.goal.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'moderate gain') {
-				state.carbs = (state.goal.slice(0,7) * .40) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goa.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'standard gain') {
-				state.carbs = (state.goal.slice(0,7) * .45) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goal.slice(0,7) * .30) / 9;
-			} else if (state.goalWord === 'intense gain') {
-				state.carbs = (state.goal.slice(0,7) * .50) / 4;
-				state.protein = (state.goal.slice(0,7) * .25) / 4;
-				state.fat = (state.goal.slice(0,7) * .25) / 9;
-			}
-		} else if (action.bodyType === 'endomorph') {
-			if (state.goalWord === 'moderate loss') {
-				state.carbs = (state.goal.slice(0,7) * .20) / 4;
-				state.protein = (state.goal.slice(0,7) * .50) / 4;
-				state.fat = (state.goal.slice(0,7) * .30) / 9;
-			} else if (state.goalWord === 'standard loss') {
-				state.carbs = (state.goal.slice(0,7) * .15) / 4;
-				state.protein = (state.goal.slice(0,7) * .50) / 4;
-				state.fat = (state.goal.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'intense loss') {
-				state.carbs = (state.goal.slice(0,7) * .10) / 4;
-				state.protein = (state.goal.slice(0,7) * .50) / 4;
-				state.fat = (state.goal.slice(0,7) * .40) / 9;
-			} else if (state.goalWord === 'sedentary') {
-				state.carbs = (state.goal.slice(0,7) * .25) / 4;
-				state.protein = (state.goal.slice(0,7) * .40) / 4;
-				state.fat = (state.goal.slice(0,7) * .35) / 9;
-			} else if (state.goalWord === 'moderate gain') {
-				state.carbs = (state.goal.slice(0,7) * .30) / 4;
-				state.protein = (state.goal.slice(0,7) * .50) / 4;
-				state.fat = (state.goal.slice(0,7) * .20) / 9;
-			} else if (state.goalWord === 'standard gain') {
-				state.carbs = (state.goal.slice(0,7) * .35) / 4;
-				state.protein = (state.goal.slice(0,7) * .45) / 4;
-				state.fat = (state.goal.slice(0,7) * .20) / 9;
-			} else if (state.goalWord === 'intense gain') {
-				state.carbs = (state.goal.slice(0,7) * .35) / 4;
-				state.protein = (state.goal.slice(0,7) * .40) / 4;
-				state.fat = (state.goal.slice(0,7) * .25) / 9;
-			}
+	} else if (action.type === actions.CALCULATE_MACROS) {
+		state.dividerError = false;
+		const sum = Number(action.carb) + Number(action.fat) + Number(action.protein);
+		console.log(sum);
+		if (sum < 100 || sum > 100) {
+			state.dividerError = true;
 		}
-		state.carbs = state.carbs.toFixed(2).toString() + " grams/day";
-		state.fat = state.fat.toFixed(2).toString() + " grams/day";
-		state.protein = state.protein.toFixed(2).toString() + " grams/day";
+		const tdee = Number(state.TDEE.slice(0,7));
+		const carb = ((Number(action.carb) / 100) * tdee) / 4;
+		const fat = ((Number(action.fat) / 100) * tdee) / 9;
+		const protein = ((Number(action.protein) / 100) * tdee) / 4;
+
+		state.carb = carb.toFixed(2).toString() + " grams/day";
+		state.fat = fat.toFixed(2).toString() + " grams/day";
+		state.protein = protein.toFixed(2).toString() + " grams/day";
 	} else if (action.type === actions.CALCULATE_DAILY_MACROS) {
 		state.dividerError = false;
 		const sum = Number(action.carb) + Number(action.fat) + Number(action.protein);
@@ -170,9 +87,9 @@ const reducer = (state, action) => {
 		const fat = ((Number(action.fat) / 100) * Number(action.tdee)) / 9;
 		const protein = ((Number(action.protein) / 100) * Number(action.tdee)) / 4;
 
-		state.dividerCarb = carb.toFixed(2).toString() + " grams/day";
-		state.dividerFat = fat.toFixed(2).toString() + " grams/day";
-		state.dividerProtein = protein.toFixed(2).toString() + " grams/day";
+		state.carb = carb.toFixed(2).toString() + " grams/day";
+		state.fat = fat.toFixed(2).toString() + " grams/day";
+		state.protein = protein.toFixed(2).toString() + " grams/day";
 	}
 
 	console.log(state);

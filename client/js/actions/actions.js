@@ -28,13 +28,15 @@ const calculateGoals = (goal) => {
 	};
 };
 
-const CALCULATE_BODY_TYPE = 'CALCULATE_BODY_TYPE';
-const calculateBodyType = (bodyType) => {
+const CALCULATE_MACROS = 'CALCULATE_MACROS';
+const calculateMacros = (carb, fat, protein) => {
 	return {
-		type: CALCULATE_BODY_TYPE,
-		bodyType: bodyType
-	};
-};
+		type: CALCULATE_MACROS,
+		carb: carb,
+		fat: fat,
+		protein: protein
+	}
+}
 
 const CALCULATE_DAILY_MACROS = 'CALCULATE_DAILY_MACROS';
 const calculateDailyMacros = (tdee, carb, fat, protein) => {
@@ -57,8 +59,8 @@ exports.calculateTDEE = calculateTDEE;
 exports.CALCULATE_GOALS = CALCULATE_GOALS;
 exports.calculateGoals = calculateGoals;
 
-exports.CALCULATE_BODY_TYPE = CALCULATE_BODY_TYPE;
-exports.calculateBodyType = calculateBodyType;
-
 exports.CALCULATE_DAILY_MACROS = CALCULATE_DAILY_MACROS;
 exports.calculateDailyMacros = calculateDailyMacros;
+
+exports.CALCULATE_MACROS = CALCULATE_MACROS;
+exports.calculateMacros = calculateMacros;

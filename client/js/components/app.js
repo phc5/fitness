@@ -1,10 +1,13 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default React.createClass({
 	render() {
 		return (
 			<div>
-				{this.props.children}
+				<MuiThemeProvider>
+					{this.props.children}
+				</MuiThemeProvider>
 			</div>
 		);
 	}

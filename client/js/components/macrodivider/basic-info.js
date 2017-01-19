@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import actions from '../../actions/actions';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 
 class BasicInfo extends Component {
 
@@ -18,26 +20,23 @@ class BasicInfo extends Component {
 	render() {
 		return (
 			<section>
+				<h2>Basic Information</h2>
 				<form onSubmit={this._submit.bind(this)} className="divider-form">
 					<section>
-						<h3>TDEE:</h3>
-						<input name="tdee" type="text" pattern="^[0-9]*$" required autoComplete="off"/> calories/day
+						<TextField name="tdee" pattern="^[0-9]*$" floatingLabelText="TDEE" required autoComplete="off" hintText="Total Calories per Day"/> 
 					</section>
 
 					<section>
-						<h3>% Carbohydrate</h3>
-						<input name="carb" type="text" pattern="^[0-9]*$" required autoComplete="off"/> % 
+						<TextField name="carb" pattern="^[0-9]*$" floatingLabelText="% Carbohydrate" required autoComplete="off" hintText="% of Carb to Consume per Day"/>
 					</section>
 					<section>
-						<h3>% Fat</h3>
-						<input name="fat" type="text" pattern="^[0-9]*$" required autoComplete="off"/> %
+						<TextField name="fat" pattern="^[0-9]*$" floatingLabelText="% Fat" required autoComplete="off" hintText="% of Fat to Consume per Day"/>
 					</section>
 					<section>
-						<h3>% Protein</h3>
-						<input name="protein" type="text" pattern="^[0-9]*$" required autoComplete="off"/> %
+						<TextField name="protein" pattern="^[0-9]*$" floatingLabelText="% Protein" required autoComplete="off" hintText="% of Protein to Consume per Day"/>
 					</section>
 
-					<button type="submit">Calculate your daily macros!</button>
+					<FlatButton type="submit" label="Calculate Your Daily Macros!" backgroundColor="#FFC107"/>
 				</form>
 			</section>
 		);
