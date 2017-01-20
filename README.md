@@ -4,6 +4,14 @@ An online calculator that helps users calculate their daily macronutrient (prote
 
 This project also includes a MacroDivider, which can be used if the user already knows their daily target TDEE. The MacroDivider asks for a percentage for each macronutrient and will calculate how many grams per day the user needs for each macronutrient. 
 
+## Design
+This was my initial mockup of the MacroCalculator. I only wanted to get the functionality down and did not pay much attention to styling at this point of the project.
+
+![Initial Mockup](./client/assets/before.png)
+
+I used Material-UI to style and design MacroCalculator.
+![Initial Mockup](./client/assets/after.png)
+
 ## Technologies Used
 - React.js
 - Redux
