@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import Results from './results';
 import {connect} from 'react-redux';
 import actions from '../../actions/actions';
-import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 import {
 	Step,
 	Stepper,
@@ -12,6 +11,7 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Subheader from 'material-ui/Subheader';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 class Calculator extends Component {
@@ -74,16 +74,20 @@ class Calculator extends Component {
 	};
 
 	renderStepActions(step) {
+		let nextButton = null;
+		if (this.state.stepIndex < 3) {
+			nextButton = (
+				<RaisedButton
+					label='Next'
+					onTouchTap={this.handleNext.bind(this)}
+					style={{marginRight: 12}}
+					primary={true}
+				/>
+			);
+		}
 		return (
 			<div style={{margin: '12px 0', display: 'inline-block'}}>
-				<RaisedButton
-					label={this.state.stepIndex === 3 ? 'Calculate Macros' : 'Next'}
-					disableTouchRipple={true}
-					disableFocusRipple={true}
-					primary={true}
-					onTouchTap={this.state.stepIndex === 3 ? this._clickMacro.bind(this) : this.handleNext.bind(this)}
-					style={{marginRight: 12}}
-				/>
+				{nextButton}
 				{step > 0 && (
 					<FlatButton
 						label="Back"
@@ -99,7 +103,7 @@ class Calculator extends Component {
 
 	render() {
 		const {finished, stepIndex} = this.state;
-		const styles = {
+		const radioStyles = {
 		  block: {
 		    maxWidth: 250,
 		  },
@@ -107,144 +111,254 @@ class Calculator extends Component {
 		    marginBottom: 16,
 		  },
 		};
+		const paperStyles = {
+			padding: 30,
+			width: '75%',
+			margin: 'auto'
+		}
+		const subheaderStyles = {
+			paddingLeft: 0,
+			fontSize: 20
+		}
+		const stepLabelStyles = {
+			fontSize: 25
+		}
+		const resultPaperStyle = {
+			width: '33%',
+			textAlign: 'center'
+		}
+		let results = "";
+		if (!this.props.dividerError) {
+			results = (
+				<section>
+					<h2>Results</h2>
+					<section id="results">
+						<Paper rounded={false} style={resultPaperStyle} zDepth={1}>
+							<Subheader style={subheaderStyles}>Carbs</Subheader>
+							<p>{this.props.carb}</p>
+						</Paper>
+						<Paper rounded={false} style={resultPaperStyle} zDepth={1}>
+							<Subheader style={subheaderStyles}>Fat</Subheader>
+							<p>{this.props.fat}</p>
+						</Paper>
+						<Paper rounded={false} style={resultPaperStyle} zDepth={1}>
+							<Subheader style={subheaderStyles}>Protein</Subheader>
+							<p>{this.props.protein}</p>
+						</Paper>
+					</section>
+				</section>
+			);
+		} else {
+			results = (
+				<section>
+					<h2>Results</h2>
+					<section id="results">
+						<p>Percentages dont add up to 100. Please check your percentages!</p>
+					</section>
+				</section>
+			);
+		}
+		console.log(results);
 		return (
 			<section className="calculator-container">
 				<a href="/" className="title"><h1 style={{fontSize: 70 + 'px'}}>MacroCalculator</h1></a>
-				<Stepper activeStep={stepIndex} orientation="vertical">
-					<Step>
-						<StepLabel>Basic Information</StepLabel>
-						<StepContent>
-							<form id="BMR-form">
-								<section>
-									<RadioButtonGroup name="gender">
-								    	<RadioButton
-									        value="male"
-									        label="male"
-									        style={styles.radioButton}
-									    />
-									    <RadioButton
-									        value="female"
-									        label="female"
-									        style={styles.radioButton}
-									    />
-									</RadioButtonGroup>
-								</section>
+				<Paper style={paperStyles} zDepth={5} >
+					<Stepper activeStep={stepIndex} orientation="vertical">
+						<Step>
+							<StepLabel style={stepLabelStyles}>Basic Information</StepLabel>
+							<StepContent>
+								<form id="BMR-form">
+									<section>
+										<Subheader style={subheaderStyles}>Gender</Subheader>
+										<RadioButtonGroup name="gender">
+									    	<RadioButton
+										        value="male"
+										        label="Male"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="female"
+										        label="Female"
+										        style={radioStyles.radioButton}
+										    />
+										</RadioButtonGroup>
+									</section>
 
-								<section>
-									<TextField name="age" pattern="^[0-9]*$" floatingLabelText="Age" required autoComplete="off" hintText="Your Age."/> 
-								</section>
+									<section>
+										<TextField name="age" pattern="^[0-9]*$" floatingLabelText="Age" required autoComplete="off" hintText="Your age."/> 
+									</section>
 
-								<section>
-									<TextField name="feet" pattern="^[0-9]*$" floatingLabelText="Feet" required autoComplete="off" hintText="Your Height: Feet."/> 
-									<TextField name="inches" pattern="^[0-9]*$" floatingLabelText="Inches" required autoComplete="off" hintText="Your Height: Inches."/> 
-								</section>
+									<section>
+										<TextField name="feet" pattern="^[0-9]*$" floatingLabelText="Feet" required autoComplete="off" hintText="Your height in feet."/> 
+										<TextField name="inches" pattern="^[0-9]*$" floatingLabelText="Inches" required autoComplete="off" hintText="Your height in inches."/> 
+									</section>
 
-								<section>
-									<TextField name="pounds" pattern="^[0-9]*$" floatingLabelText="Weight" required autoComplete="off" hintText="Your weight in pounds."/> 
+									<section>
+										<TextField name="pounds" pattern="^[0-9]*$" floatingLabelText="Weight" required autoComplete="off" hintText="Your weight in pounds."/> 
+									</section>
+								</form>
+								
+								<section id="bmr-output">
+									<h3>Your BMR: {this.props.BMR}</h3>
 								</section>
-							</form>
-							
-							<section id="bmr-output">
-								<h3>Your BMR: {this.props.BMR}</h3>
-							</section>
-							<RaisedButton
-								label='Calculate BMR'
-								disableTouchRipple={true}
-								disableFocusRipple={true}
-								primary={true}
-								style={{marginRight: 12}}
-								onClick={this._clickBMR.bind(this)}
-							/>
-							{this.renderStepActions(0)}
-						</StepContent>
-					</Step>
+								<RaisedButton
+									label='Calculate BMR'
+									disableTouchRipple={true}
+									disableFocusRipple={true}
+									style={{marginRight: 12}}
+									onClick={this._clickBMR.bind(this)}
+									backgroundColor="#FFC107"
+								/>
+								{this.renderStepActions(0)}
+							</StepContent>
+						</Step>
 
-					<Step>
-						<StepLabel>Daily Activity Level</StepLabel>
-						<StepContent>
-							<form id="activity-form" className="flex-between">
-								<section>
-									<input type="radio" name="activity" value="sedentary"/> Sedentary (little or no exercise)<br/>
-									<input type="radio" name="activity" value="lightly-active"/> Lightly Active (light exercise/sports 1-3 days per week)<br/>
-									<input type="radio" name="activity" value="moderately-active"/> Moderately Active (moderate exercise/sports 3-5 days per week)<br/>
-									<input type="radio" name="activity" value="very-active"/> Very Active (hard exercise/sports 6-7 days a week)<br/>
-									<input type="radio" name="activity" value="extremely-active"/> Extremely Active (very hard exercise/sports & physical job or 2x training)
-								</section>
-							</form>
+						<Step>
+							<StepLabel style={stepLabelStyles}>Daily Activity Level</StepLabel>
+							<StepContent>
+								<form id="activity-form">
+									<section>
+										<Subheader style={subheaderStyles}>Which choice best describes your day?</Subheader>
+										<RadioButtonGroup name="activity">
+									    	<RadioButton
+										        value="sedentary"
+										        label="Sedentary (little or no exercise)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="lightly-active"
+										        label="Lightly Active (light exercise/sports 1-3 days per week)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="moderately-active"
+										        label="Moderately Active (moderate exercise/sports 3-5 days per week)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="very-active"
+										        label="Very Active (hard exercise/sports 6-7 days a week)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="extremely-active"
+										        label="Extremely Active (very hard exercise/sports & physical job or 2x training)"
+										        style={radioStyles.radioButton}
+										    />
+										</RadioButtonGroup>
+									</section>
+								</form>
 
-							<section id="tdee-output">
-								<h3>Your TDEE: {this.props.TDEE}</h3>
-							</section>
-							<RaisedButton
-								label='Calculate TDEE'
-								disableTouchRipple={true}
-								disableFocusRipple={true}
-								primary={true}
-								style={{marginRight: 12}}
-								onClick={this._clickActivity.bind(this)}
-							/>
-							{this.renderStepActions(1)}
-						</StepContent>
-					</Step>
+								<section id="tdee-output">
+									<h3>Your TDEE: {this.props.TDEE}</h3>
+								</section>
+								<RaisedButton
+									label='Calculate TDEE'
+									style={{marginRight: 12}}
+									onClick={this._clickActivity.bind(this)}
+									backgroundColor="#FFC107"
+								/>
+								{this.renderStepActions(1)}
+							</StepContent>
+						</Step>
 
-					<Step>
-						<StepLabel>Goals</StepLabel>
-						<StepContent>
-							<form id="goal-form" className="flex-between">
-								<section>
-									<h3>Lose Weight</h3>
-									<input type="radio" name="goal" value="moderate loss"/> Moderate (-15%)<br/>
-									<input type="radio" name="goal" value="standard loss"/> Standard (-20%)<br/>
-									<input type="radio" name="goal" value="intense loss"/> Intense (-25%)
-								</section>
+						<Step>
+							<StepLabel style={stepLabelStyles}>Goals</StepLabel>
+							<StepContent>
+								<form id="goal-form" className="flex-between">
+									<section className="goal-col">
+										<Subheader style={subheaderStyles}>Lose Fat</Subheader>
+										<RadioButtonGroup name="goal">
+									    	<RadioButton
+										        value="moderate loss"
+										        label="Moderate (-15%)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="standard loss"
+										        label="Standard (-20%)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="intense loss"
+										        label="Intense (-25%)"
+										        style={radioStyles.radioButton}
+										    />
+										</RadioButtonGroup>
+									</section>
 
-								<section>
-									<h3>Maintain</h3>
-									<input type="radio" name="goal" value="sedentary"/> Same as TDEE<br/>
-								</section>
+									<section className="goal-col">
+										<Subheader style={subheaderStyles}>Maintain</Subheader>
+										<RadioButtonGroup name="goal">
+									    	<RadioButton
+										        value="sedentary"
+										        label="Same as TDEE"
+										        style={radioStyles.radioButton}
+										    />
+										</RadioButtonGroup>
+									</section>
 
-								<section>
-									<h3>Gain Weight</h3>
-									<input type="radio" name="goal" value="moderate gain"/> Moderate (+5%)<br/>
-									<input type="radio" name="goal" value="standard gain"/> Standard (+10%)<br/>
-									<input type="radio" name="goal" value="intense gain"/> Intense (+15%)
-								</section>
-							</form>
+									<section className="goal-col">
+										<Subheader style={subheaderStyles}>Gain Muscle</Subheader>
+										<RadioButtonGroup name="goal">
+									    	<RadioButton
+										        value="moderate gain"
+										        label="Moderate (+5%)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="standard gain"
+										        label="Standard (+10%)"
+										        style={radioStyles.radioButton}
+										    />
+										    <RadioButton
+										        value="intense gain"
+										        label="Intense (-15%)"
+										        style={radioStyles.radioButton}
+										    />
+										</RadioButtonGroup>
+									</section>
+								</form>
 
-							<section id="goal-output">
-								<h3>Your Goal: {this.props.goal}</h3>
-							</section>
-							<RaisedButton
-								label='Calculate TDEE with Goal'
-								disableTouchRipple={true}
-								disableFocusRipple={true}
-								primary={true}
-								style={{marginRight: 12}}
-								onClick={this._clickGoal.bind(this)}
-							/>
-							{this.renderStepActions(2)}
-						</StepContent>
-					</Step>
+								<section id="goal-output">
+									<h3>Your Goal: {this.props.goal}</h3>
+								</section>
+								<RaisedButton
+									label='Calculate TDEE with Goal'
+									style={{marginRight: 12}}
+									onClick={this._clickGoal.bind(this)}
+									backgroundColor="#FFC107"
+								/>
+								{this.renderStepActions(2)}
+							</StepContent>
+						</Step>
 
-					<Step>
-						<StepLabel>Divide Your Macros</StepLabel>
-						<StepContent>
-							<form id='macro-form' className="divider-form">
-								<section>
-									<TextField name="carb" pattern="^[0-9]*$" floatingLabelText="% Carbs" required autoComplete="off" hintText="% of Carbs to Consume per Day"/> 
-								</section>
-								<section>
-									<TextField name="fat" pattern="^[0-9]*$" floatingLabelText="% Fat" required autoComplete="off" hintText="% of Fat to Consume per Day"/> 
-								</section>
-								<section>
-									<TextField name="protein" pattern="^[0-9]*$" floatingLabelText="% Protein" required autoComplete="off" hintText="% of Protein to Consume per Day"/> 
-								</section>
-							</form>
-							{this.renderStepActions(3)}
-						</StepContent>
-					</Step>
-				</Stepper>		
-				<Results />
+						<Step>
+							<StepLabel style={stepLabelStyles}>Divide Your Macros</StepLabel>
+							<StepContent>
+								<form id='macro-form' className="divider-form">
+									<section>
+										<TextField name="carb" pattern="^[0-9]*$" floatingLabelText="% Carbs" required autoComplete="off" hintText="% of Carbs to Consume per Day"/> 
+									</section>
+									<section>
+										<TextField name="fat" pattern="^[0-9]*$" floatingLabelText="% Fat" required autoComplete="off" hintText="% of Fat to Consume per Day"/> 
+									</section>
+									<section>
+										<TextField name="protein" pattern="^[0-9]*$" floatingLabelText="% Protein" required autoComplete="off" hintText="% of Protein to Consume per Day"/> 
+									</section>
+								</form>
+								{results}
+								<RaisedButton
+									label='Calculate Macros'
+									style={{marginRight: 12}}
+									onClick={this._clickMacro.bind(this)}
+									backgroundColor="#FFC107"
+								/>
+								{this.renderStepActions(3)}
+							</StepContent>
+						</Step>
+					</Stepper>		
+				</Paper>
 			</section>
 			);
 	}
@@ -253,7 +367,11 @@ const mapStateToProps = function (state, props) {
     return {
         BMR: state.BMR,
         TDEE: state.TDEE,
-        goal: state.goal
+        goal: state.goal,
+        protein: state.protein,
+       	fat: state.fat,
+       	carb: state.carb,
+       	dividerError: state.dividerError
     };
 };
 
