@@ -42,7 +42,7 @@ class Home extends Component {
 					<Card className="col3-section">
 						<CardTitle title="Need Help?"/>
 						<CardText>
-							Don't know what a certain word means or what your results mean? We're here to answer with your questions!
+							Don't know what a certain word means or what your results mean? We're here to answer your questions!
 						</CardText>
 						<CardActions>
 							<RaisedButton label="Get Help!" href="#/help" backgroundColor="#FFC107"/>

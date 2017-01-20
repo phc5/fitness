@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import {Tabs, Tab} from 'material-ui/Tabs';
+import Divider from 'material-ui/Divider';
+import {List, ListItem} from 'material-ui/List';
 
 class Help extends Component {
 
@@ -23,26 +25,59 @@ class Help extends Component {
 				<section className="help-container">
 					<h1 className="title" id="helpTitle">What is <a href="/" className="title">MacroCalculator</a></h1>
 					
-					<h3 id="summary">MacroCalculator is a tool that provides estimates on your total daily energy expenditure and breaksdown your daily macronutrients.</h3>
+					<h3 id="summary">MacroCalculator is a tool that provides estimates on your total daily energy 
+						expenditure and breaksdown your daily macronutrients.
+					</h3>
 
 					<Tabs inkBarStyle={inkBarStyles} style={tabsStyles}>
 					    <Tab label="How MacroCalculator Works" style={tabStyles}>
-					      	<ol>
-								<li>Initially, MacroCalculator calculates your BMR (<a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate#BMR_estimation_formulas" target="_blank">Basal Metabolic Rate</a>) using your gender, age, weight, and height.</li>
-								<li>MacroCalculator then uses your BMR and daily activity level to calculate your TDEE using the <a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" target="_blank">Harris-Benedict Equation</a>.</li>
-								<li>After calculating your TDEE, MacroCalculator asks for your fitness goals and your body type (ectomorph, mesomorph, or endomorph). Here is a link that will help you determine your body type: <a href="" target="_blank">Body Type Test</a>.</li>
-								<li>Now all you have to do is log your food and track your macros to reach your goals!</li>
-							</ol>
+					    	<ListItem>
+				    			Initially, MacroCalculator calculates your BMR (
+				    			<a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate#BMR_estimation_formulas" 
+				    			target="_blank">Basal Metabolic Rate</a>) using your gender, age, weight, and height.
+					    	</ListItem>
+
+				    		<Divider />
+
+				    		<ListItem>
+				    			MacroCalculator then uses your BMR and daily activity level to calculate 
+				    			your TDEE using the <a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" 
+				    			target="_blank">Harris-Benedict Equation</a>.
+				    		</ListItem>
+
+				    		<Divider />
+
+				    		<ListItem>
+				    			After calculating your TDEE, we ask for your goals (lose fat, maintain weight, 
+				    			or gain muscle) and cut a percentage of calories from your TDEE based on your goals.
+				    		</ListItem>
+
+				    		<Divider />
+
+				    		<ListItem>
+				    			We then ask you for how you want to divide up your macros and calculate your macros based off those percentages. 
+				    			Here are some baseline ratios.
+				    			<ListItem>Gaining muscle: 40-60% Carb, 15-25% Fat, and 25-35% Protein.</ListItem>
+				    			<ListItem>Maintenance: 30-50% Carb, 25-35% Fat, and 25-35% Protein</ListItem>
+				    			<ListItem>Losing fat: 10-30% Carb, 30-40%, 40-50% Protein</ListItem>
+				    		</ListItem>
+
+				    		<Divider />
+
+				    		<ListItem>
+				    			Now all you have to do is log your food and track your macros to reach your goals!
+				    		</ListItem>
 					    </Tab>
+
 					    <Tab label="Definitions & References" style={tabStyles}> 
-					    	<ul className="defRefList">
-								<li><b><u>BMR (Basal Metabolic Rate)</u></b>: is the minimal rate of energy expenditure per unit time by endothermic animals at rest.</li><br />
-								<li><b><u>TDEE (Total Daily Energy Expenditure)</u></b>: s an estimation of how many calories you burn per day when exercise is taken into account. It is calculated by first figuring out your Basal Metabolic Rate, then multiplying that value by an activity multiplier.</li><br />
-								<li><b><u>Macros</u></b>: short for macronutrients and are comprised of protein, fat, and carbohydrate.</li><br />
-								<li><b><u>Ectomorph</u></b>: thin build, flat chest, small shoulders, lean muscle mass, finds it hard to gain weight, fast metabolism, and small frame and bone structure.</li><br />
-								<li><b><u>Mesomorph</u></b>: athletic, generally hard body, well defined muscles, rectangular shaped body, gains muscle easily, and gains fat more easily than ectomorphs.</li><br />
-								<li><b><u>Endomorph</u></b>: soft and round body, gains muscle and fat very easily, "stocky" build, finds it hard to lose fat, slow metabolism, muscles not so well defined.</li><br />
-							</ul>
+					    	<List>
+					    		<ListItem primaryText="BMR (Basal Metabolic Rate): is the minimal rate of energy expenditure per unit time by endothermic animals at rest."/>
+					    		<Divider />
+					    		<ListItem primaryText="TDEE (Total Daily Energy Expenditure): is an estimation of how many calories you burn per day when exercise is taken into account. It is calculated by first figuring out your Basal Metabolic Rate, then multiplying that value by an activity multiplier."/>
+					    		<Divider />
+					    		<ListItem primaryText="Macros: is short for macronutrients and are comprised of protein, fat, and carbohydrate."/>
+					    		<Divider />
+					    	</List>
 					    </Tab>
 					</Tabs>
 				</section>
